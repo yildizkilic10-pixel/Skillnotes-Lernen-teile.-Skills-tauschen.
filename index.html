@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillNotes – Lernen teilen. Skills tauschen.</title>
-  <meta name="description" content="SkillNotes ist die Community-App für Studierende, in der eigene Lerninhalte geteilt, gefunden und bewertet werden können." />
+  <title>SkillNotes</title>
+  <meta name="description" content="SkillNotes ist die Community-App für Studierende mit Datenbank, Lernmaterialien, Skills, Bewertungen und Chat." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,75 +20,340 @@
       --shadow:0 20px 50px rgba(249,115,22,.14);
       --radius:24px;
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:'Inter',sans-serif;color:var(--text);background:radial-gradient(circle at top left,#fff0e4 0,#fff9f3 35%,#ffffff 100%);line-height:1.6}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:radial-gradient(circle at top left,#fff0e4 0,#fff9f3 35%,#ffffff 100%);
+      line-height:1.6;
+    }
+
     a{text-decoration:none;color:inherit}
     .container{width:min(1180px,calc(100% - 32px));margin:0 auto}
-    .nav{position:sticky;top:0;z-index:30;background:rgba(255,249,243,.84);backdrop-filter:blur(14px);border-bottom:1px solid rgba(253,226,200,.9)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
-    .brand-mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--primary),#fb923c);color:#fff;display:grid;place-items:center;box-shadow:var(--shadow)}
-    .nav-links{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-weight:500}
-    .profile-link{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:700}
-    .profile-dot{width:10px;height:10px;border-radius:50%;background:var(--primary)}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:700;border:1px solid transparent;transition:.2s ease;cursor:pointer}
-    .btn-primary{background:var(--primary);color:#fff;box-shadow:var(--shadow)}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:30;
+      background:rgba(255,249,243,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(253,226,200,.9);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      font-size:1.05rem;
+    }
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),#fb923c);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      box-shadow:var(--shadow);
+    }
+    .nav-links{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:var(--muted);
+      font-weight:500;
+    }
+    .profile-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-weight:700;
+      box-shadow:0 10px 24px rgba(0,0,0,.04);
+    }
+    .profile-dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--primary);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 22px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid transparent;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
     .btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
-    .btn-secondary{background:#fff;color:var(--text);border-color:var(--line)}
+    .btn-secondary{
+      background:#fff;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
     .hero{padding:56px 0 28px}
-    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--primary-dark);font-weight:700;font-size:.92rem}
-    h1{font-size:clamp(2.4rem,5vw,4.8rem);line-height:1.02;margin:18px 0 16px;letter-spacing:-.04em}
-    .lead{font-size:1.1rem;color:var(--muted);max-width:58ch}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
-    .stat,.card,.feature,.panel{background:rgba(255,255,255,.9);border:1px solid rgba(253,226,200,.9);box-shadow:var(--shadow);border-radius:var(--radius)}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:var(--primary-dark);
+      font-weight:700;
+      font-size:.92rem;
+    }
+    h1{
+      font-size:clamp(2.4rem,5vw,4.8rem);
+      line-height:1.02;
+      margin:18px 0 16px;
+      letter-spacing:-.04em;
+    }
+    .lead{
+      font-size:1.1rem;
+      color:var(--muted);
+      max-width:58ch;
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:28px;
+    }
+    .stat,.card,.feature,.panel,.material-item,.chat-list,.chat-window{
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(253,226,200,.9);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+    }
     .stat{padding:18px;text-align:center}
     .stat strong{display:block;font-size:1.5rem}
-    .visual{position:relative;min-height:520px;display:grid;place-items:center}
-    .blob{position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(249,115,22,.96) 0 38%,rgba(249,115,22,.90) 39% 100%);border-radius:40px;clip-path:polygon(0 0,100% 0,100% 100%,18% 100%,0 76%)}
-    .mock{position:relative;width:min(100%,430px);padding:22px;border-radius:30px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);color:#fff;box-shadow:0 30px 80px rgba(0,0,0,.12)}
+    .visual{
+      position:relative;
+      min-height:520px;
+      display:grid;
+      place-items:center;
+    }
+    .blob{
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 30% 40%,rgba(249,115,22,.96) 0 38%,rgba(249,115,22,.90) 39% 100%);
+      border-radius:40px;
+      clip-path:polygon(0 0,100% 0,100% 100%,18% 100%,0 76%);
+    }
+    .mock{
+      position:relative;
+      width:min(100%,430px);
+      padding:22px;
+      border-radius:30px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.22);
+      backdrop-filter:blur(10px);
+      color:#fff;
+      box-shadow:0 30px 80px rgba(0,0,0,.12);
+    }
     .mock h3{margin:0 0 10px;font-size:1.5rem}
     .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
-    .chip{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.18);font-size:.92rem}
+    .chip{
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:.92rem;
+    }
+
     section{padding:28px 0}
-    .section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
-    .section-title h2{margin:0;font-size:clamp(1.6rem,3vw,2.5rem)}
-    .section-title p{margin:0;color:var(--muted);max-width:62ch}
+    .section-title{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:clamp(1.6rem,3vw,2.5rem);
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      max-width:62ch;
+    }
     .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .feature,.card,.panel{padding:22px}
-    .icon{width:44px;height:44px;border-radius:14px;background:rgba(249,115,22,.12);display:grid;place-items:center;font-size:1.2rem;margin-bottom:14px}
-    .feature h3,.card h3,.panel h3{margin:0 0 10px;font-size:1.2rem}
+    .feature,.card,.panel,.material-item,.chat-list,.chat-window{padding:22px}
+    .icon{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:rgba(249,115,22,.12);
+      display:grid;
+      place-items:center;
+      font-size:1.2rem;
+      margin-bottom:14px;
+    }
+    .feature h3,.card h3,.panel h3,.material-item h4{margin:0 0 10px;font-size:1.2rem}
     .feature p,.card p,.panel p,.muted{color:var(--muted)}
-    .list{margin:12px 0 0;padding:0;list-style:none}
-    .list li{padding:10px 0;border-top:1px solid #f6e4d4}
-    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#fef3e8;color:#9a3412;font-weight:700;font-size:.9rem}
+    .list{
+      margin:12px 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .list li{
+      padding:10px 0;
+      border-top:1px solid #f6e4d4;
+    }
+    .pill{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fef3e8;
+      color:#9a3412;
+      font-weight:700;
+      font-size:.9rem;
+    }
+
     .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:start}
-    .table{width:100%;border-collapse:collapse;margin-top:8px;overflow:hidden;border-radius:18px}
-    .table th,.table td{padding:12px 14px;border-bottom:1px solid #f3e3d5;text-align:left}
+    .table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      overflow:hidden;
+      border-radius:18px;
+    }
+    .table th,.table td{
+      padding:12px 14px;
+      border-bottom:1px solid #f3e3d5;
+      text-align:left;
+    }
     .table th{background:#fff7ef}
-    .search-wrap{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    .search-input{flex:1;min-width:240px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);font:inherit;background:#fff}
-    .material-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
-    .material-item{padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
-    .material-item h4{margin:0 0 6px}
+
+    .search-wrap{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .search-input{
+      flex:1;
+      min-width:240px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      font:inherit;
+      background:#fff;
+    }
+    .material-list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
     .material-item button{margin-top:10px}
-    .chat{display:grid;grid-template-columns:280px 1fr;gap:18px}
-    .chat-list,.chat-window{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
-    .chat-list{padding:18px}
-    .chat-contact{padding:14px;border-radius:16px;background:#fff7ef;margin-top:10px}
-    .chat-window{display:flex;flex-direction:column;min-height:420px}
-    .chat-header{padding:18px 20px;border-bottom:1px solid var(--line);font-weight:700}
-    .messages{padding:18px 20px;display:grid;gap:12px;flex:1}
-    .msg{max-width:72%;padding:14px 16px;border-radius:18px}
-    .msg.me{justify-self:end;background:var(--primary);color:#fff;border-bottom-right-radius:6px}
-    .msg.other{background:#f8fafc;border:1px solid #e5e7eb;border-bottom-left-radius:6px}
-    .chat-input{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--line)}
-    .chat-input input{flex:1;padding:14px 16px;border-radius:14px;border:1px solid var(--line);font:inherit}
-    .cta{padding:30px;background:linear-gradient(135deg,#fff 0,#fff7ef 100%);border:1px solid var(--line);border-radius:34px;box-shadow:var(--shadow);text-align:center}
-    .footer{display:none}
+
+    .chat{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:18px;
+    }
+    .chat-contact{
+      padding:14px;
+      border-radius:16px;
+      background:#fff7ef;
+      margin-top:10px;
+    }
+    .chat-window{
+      display:flex;
+      flex-direction:column;
+      min-height:420px;
+    }
+    .chat-header{
+      padding:18px 20px;
+      border-bottom:1px solid var(--line);
+      font-weight:700;
+    }
+    .messages{
+      padding:18px 20px;
+      display:grid;
+      gap:12px;
+      flex:1;
+    }
+    .msg{
+      max-width:72%;
+      padding:14px 16px;
+      border-radius:18px;
+    }
+    .msg.me{
+      justify-self:end;
+      background:var(--primary);
+      color:#fff;
+      border-bottom-right-radius:6px;
+    }
+    .msg.other{
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-bottom-left-radius:6px;
+    }
+    .chat-input{
+      display:flex;
+      gap:10px;
+      padding:16px 20px;
+      border-top:1px solid var(--line);
+    }
+    .chat-input input{
+      flex:1;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      font:inherit;
+    }
+
+    .cta{
+      padding:30px;
+      background:linear-gradient(135deg,#fff 0,#fff7ef 100%);
+      border:1px solid var(--line);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+
     @media (max-width: 900px){
       .hero-grid,.grid-2,.grid-3,.split,.chat,.material-list{grid-template-columns:1fr}
       .visual{min-height:380px}
@@ -105,14 +370,19 @@
         <div class="brand-mark">🎓</div>
         <div>SkillNotes</div>
       </div>
+
       <nav class="nav-links">
         <a href="#funktionen">Funktionen</a>
         <a href="#materialien">Materialien</a>
         <a href="#skills">Skills</a>
-        <a href="#chat">Chatraum</a>
+        <a href="#chatraum">Chatraum</a>
         <a href="#belohnungen">Belohnungen</a>
       </nav>
-      <a class="profile-link" href="#profil"><span class="profile-dot"></span> Mein Profil</a>
+
+      <a class="profile-link" href="#profil">
+        <span class="profile-dot"></span>
+        Mein Profil
+      </a>
     </div>
   </header>
 
@@ -122,23 +392,28 @@
         <div>
           <span class="eyebrow">Community-App für Studierende</span>
           <h1>Lernen teilen. <br>Skills tauschen. <br>Eigene Inhalte sichtbar machen.</h1>
-          <p class="lead">SkillNotes verbindet Datenbank, Lernmaterialien, Skill-Marktplatz, Bewertungen und Chat in einer Plattform für Studierende.</p>
+          <p class="lead">SkillNotes verbindet eine Datenbank, Lernmaterialien, Skills, Bewertungen und Chat in einer Plattform für Studierende.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#funktionen">Funktionen ansehen</a>
             <a class="btn btn-secondary" href="#materialien">Materialien suchen</a>
           </div>
+
           <div class="stats">
             <div class="stat"><strong>+20</strong><span>Lernmaterial hochladen</span></div>
             <div class="stat"><strong>4,9</strong><span>Bewertungen im Profil</span></div>
             <div class="stat"><strong>1000</strong><span>Punkte bis Premium</span></div>
           </div>
         </div>
+
         <div class="visual">
           <div class="blob"></div>
           <div class="mock">
             <h3>Max Mustermann</h3>
             <p>Wirtschaftsinformatik · Semester 4</p>
-            <div class="chip-row"><span class="chip">320 Punkte</span><span class="chip">Top Contributor</span></div>
+            <div class="chip-row">
+              <span class="chip">320 Punkte</span>
+              <span class="chip">Top Contributor</span>
+            </div>
             <p><strong>Meine Skills:</strong> Excel</p>
             <p><strong>Meine Lernmaterialien:</strong> Statistik Zusammenfassung</p>
             <p><strong>Meine Aktivität:</strong> 15 Lernmaterialien hochgeladen</p>
@@ -151,13 +426,33 @@
       <div class="container">
         <div class="section-title">
           <h2>Funktionen</h2>
-          <p>Der Assistant wurde entfernt. Stattdessen steht eine Datenbank im Mittelpunkt, die eigene Inhalte, Profile und Skills organisiert.</p>
+          <p>Der Assistant wurde entfernt. Die Datenbank organisiert stattdessen Inhalte, Profile und Community-Funktionen.</p>
         </div>
+
         <div class="grid-2">
-          <article class="feature"><div class="icon">🗄️</div><h3>Datenbank</h3><p>Alle Lernmaterialien, Profile, Skills, Bewertungen und Chat-Beiträge werden zentral gespeichert und organisiert.</p></article>
-          <article class="feature"><div class="icon">📚</div><h3>Nur eigene Inhalte</h3><p>Erlaubt sind selbst erstellte Inhalte wie Zusammenfassungen, Lernkarten, Begriffserklärungen, Checklisten und Übungsfragen.</p></article>
-          <article class="feature"><div class="icon">💬</div><h3>Chatraum</h3><p>Studierende können direkt miteinander schreiben, Fragen stellen und passende Hilfe in Echtzeit bekommen.</p></article>
-          <article class="feature"><div class="icon">⭐</div><h3>Bewertungen</h3><p>Hilfreiche Beiträge und gute Unterstützung werden bewertet und im Profil sichtbar angezeigt.</p></article>
+          <article class="feature">
+            <div class="icon">🗄️</div>
+            <h3>Datenbank</h3>
+            <p>Alle Lernmaterialien, Profile, Skills, Bewertungen und Chats werden zentral gespeichert und organisiert.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">📚</div>
+            <h3>Nur eigene Inhalte</h3>
+            <p>Erlaubt sind nur selbst erstellte Inhalte wie Zusammenfassungen, Lernkarten, Begriffserklärungen, Checklisten und Übungsfragen.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">💬</div>
+            <h3>Chatraum</h3>
+            <p>Studierende können direkt miteinander schreiben, Fragen stellen und schnelle Hilfe bekommen.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">⭐</div>
+            <h3>Bewertungen</h3>
+            <p>Hilfreiche Beiträge und gute Unterstützung werden bewertet und im Profil sichtbar angezeigt.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -167,29 +462,34 @@
         <div>
           <div class="section-title">
             <h2>Lernmaterialien</h2>
-            <p>Beispiel: Wenn man auf „Zusammenfassung“ drückt, soll darunter direkt der passende Inhalt erscheinen.</p>
+            <p>Wenn man auf „Zusammenfassung“ drückt, erscheint darunter der passende Inhalt.</p>
           </div>
+
           <search class="panel">
             <div class="search-wrap">
               <input id="filterInput" class="search-input" type="search" placeholder="Lernmaterial oder Skill filtern..." aria-label="Lernmaterial oder Skill filtern">
               <button class="btn btn-primary" type="button" onclick="filterMaterials()">Filtern</button>
             </div>
+
             <div class="material-list" id="materialList">
               <div class="material-item" data-keywords="zusammenfassung statistik wirtschaft">
                 <h4>Zusammenfassung: Statistik</h4>
                 <p>Eigene Lernzusammenfassung mit den wichtigsten Formeln und Beispielen.</p>
                 <button class="btn btn-secondary" type="button" onclick="showMaterial('Zusammenfassung', 'Hier erscheint die ausgewählte Zusammenfassung mit deinen eigenen Notizen und Beispielen.')">Öffnen</button>
               </div>
+
               <div class="material-item" data-keywords="lernkarte excel funktionen">
                 <h4>Lernkarten: Excel-Funktionen</h4>
                 <p>Kompakte Karten zu SVERWEIS, WENN und Pivot-Tabellen.</p>
                 <button class="btn btn-secondary" type="button" onclick="showMaterial('Lernkarten', 'Hier erscheinen die Lernkarten mit Beispielen und kurzen Erklärungen.')">Öffnen</button>
               </div>
+
               <div class="material-item" data-keywords="checkliste prüfung lernen">
                 <h4>Checkliste: Prüfungsvorbereitung</h4>
                 <p>Schritt-für-Schritt-Liste für die Vorbereitung auf die Klausur.</p>
                 <button class="btn btn-secondary" type="button" onclick="showMaterial('Checkliste', 'Hier erscheint die Checkliste mit allen wichtigen Punkten.')">Öffnen</button>
               </div>
+
               <div class="material-item" data-keywords="übungsfragen python programmierung">
                 <h4>Übungsfragen: Python</h4>
                 <p>Eigene Fragen zum Üben mit kurzen Lösungen und Hinweisen.</p>
@@ -198,6 +498,7 @@
             </div>
           </search>
         </div>
+
         <div class="panel">
           <h3>Eigene Inhalte</h3>
           <ul class="list">
@@ -218,20 +519,33 @@
           <h2>Skills und Profile</h2>
           <p>Die Datenbank kann Profile nach Studiengang, Skill und Bewertung filtern.</p>
         </div>
+
         <div class="grid-3">
-          <div class="card"><h3>Filter nach Studiengang</h3><p>BWL, Wirtschaftsinformatik, Informatik, Marketing.</p></div>
-          <div class="card"><h3>Filter nach Skill</h3><p>Excel, Statistik, Python, Power BI, Marketing und mehr.</p></div>
-          <div class="card"><h3>Filter nach Bewertung</h3><p>Alle, 4 Sterne+, 4,5 Sterne+ und 5 Sterne.</p></div>
+          <div class="card">
+            <h3>Filter nach Studiengang</h3>
+            <p>BWL, Wirtschaftsinformatik, Informatik, Marketing.</p>
+          </div>
+
+          <div class="card">
+            <h3>Filter nach Skill</h3>
+            <p>Excel, Statistik, Python, Power BI, Marketing und mehr.</p>
+          </div>
+
+          <div class="card">
+            <h3>Filter nach Bewertung</h3>
+            <p>Alle, 4 Sterne+, 4,5 Sterne+ und 5 Sterne.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="chat">
+    <section id="chatraum">
       <div class="container">
         <div class="section-title">
           <h2>Chatraum</h2>
           <p>Hier können Studierende direkt Fragen stellen und sich austauschen.</p>
         </div>
+
         <div class="chat">
           <aside class="chat-list">
             <h3>Unterhaltungen</h3>
@@ -239,6 +553,7 @@
             <div class="chat-contact"><strong>Ali</strong><br><span class="muted">Bietet Excel-Unterstützung an</span></div>
             <div class="chat-contact"><strong>Sarah</strong><br><span class="muted">Sucht Zusammenfassungen</span></div>
           </aside>
+
           <section class="chat-window">
             <div class="chat-header">Chat mit Lisa</div>
             <div class="messages">
@@ -261,6 +576,7 @@
           <h2>Punkte und Belohnungen</h2>
           <p>Gamification motiviert Beiträge, Hilfsbereitschaft und Community-Aktivität.</p>
         </div>
+
         <div class="grid-2">
           <div class="panel">
             <h3>Punkteverteilung</h3>
@@ -274,6 +590,7 @@
               <tr><td>Anderen Nutzern helfen</td><td>+30</td></tr>
             </table>
           </div>
+
           <div class="panel">
             <h3>Prämien</h3>
             <table class="table">
@@ -292,7 +609,7 @@
     <section id="profil">
       <div class="container cta">
         <h2 style="margin-top:0">Mein Profil</h2>
-        <p class="muted">Das Profil ist jetzt direkt oben in der Leiste erreichbar und zeigt Punkte, Skills, Materialien und Bewertungen an.</p>
+        <p class="muted">Das Profil ist jetzt oben in der Leiste erreichbar und zeigt Punkte, Skills, Materialien und Bewertungen an.</p>
       </div>
     </section>
   </main>
@@ -301,6 +618,7 @@
     function showMaterial(title, text) {
       const target = document.getElementById('materialList');
       let box = document.getElementById('selectedMaterial');
+
       if (!box) {
         box = document.createElement('div');
         box.id = 'selectedMaterial';
@@ -308,6 +626,7 @@
         box.style.gridColumn = '1 / -1';
         target.prepend(box);
       }
+
       box.innerHTML = `<h4>${title}</h4><p>${text}</p>`;
       box.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -315,6 +634,7 @@
     function filterMaterials() {
       const query = document.getElementById('filterInput').value.toLowerCase().trim();
       const items = document.querySelectorAll('#materialList .material-item');
+
       items.forEach(item => {
         const text = item.dataset.keywords + ' ' + item.innerText.toLowerCase();
         item.style.display = text.includes(query) ? '' : 'none';
